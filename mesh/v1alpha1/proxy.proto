@@ -159,6 +159,9 @@ message Tracing {
       // The custom tag's value is populated by an http header from
       // an incoming request.
       RequestHeader header = 3;
+      // The custom tag's value is populated by an http header from
+      // an incoming request.
+      ResponseHeader rspheader = 4;
     }
   }
 
@@ -184,6 +187,18 @@ message Tracing {
   // A default value can be configured if the header does not exist.
   // $hide_from_docs
   message RequestHeader {
+    // HTTP header name used to obtain the value from to populate the tag value.
+    string name = 1;
+
+    // Default value to be used for the tag when the named HTTP header does not exist.
+    // The tag will be skipped if no default value is provided.
+    string default_value = 2;
+  }
+
+  // ResponseHeader is the HTTP response header which will be used to populate the span tag.
+  // A default value can be configured if the header does not exist.
+  // $hide_from_docs
+  message ResponseHeader {
     // HTTP header name used to obtain the value from to populate the tag value.
     string name = 1;
 
